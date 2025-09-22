@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test HTML</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f0f8ff; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Berhasil!</h1>
+        <p>File HTML ini dibuat otomatis oleh script bash.</p>
+        <p>Waktu: <span id="time"></span></p>
+        <h1>halo</h1>
+        <script>
+            document.getElementById("time").textContent = new Date().toLocaleString();
+        </script>
+    </div>
+</body>
+</html>

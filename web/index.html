@@ -1,0 +1,217 @@
+<!DOCTYPE html> <html lang="id"> <head> <meta charset="UTF-8"> <meta 
+    name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Panduan TMUX</title> <style>
+        :root {
+            --primary: #2c3e50; --secondary: #34495e; --accent: #3498db; 
+            --text: #ecf0f1; --code-bg: #1e272e; --highlight: #e74c3c;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box;
+        }
+        
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; background-color: var(--primary); color: 
+            var(--text);
+        }
+        
+        header { background-color: var(--secondary); padding: 1.5rem; 
+            text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent);
+        }
+        
+        .subtitle { font-size: 1.2rem; opacity: 0.8;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem;
+        }
+        
+        .intro { text-align: center; margin-bottom: 3rem;
+        }
+        
+        .intro p { font-size: 1.2rem; max-width: 800px; margin: 0 auto;
+        }
+        
+        .section-title { font-size: 1.8rem; margin: 2rem 0 1rem; 
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent); 
+            color: var(--accent);
+        }
+        
+        .card-container { display: grid; grid-template-columns: 
+            repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 
+            2rem;
+        }
+        
+        .card { background-color: var(--secondary); border-radius: 8px; 
+            padding: 1.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover { transform: translateY(-5px);
+        }
+        
+        .card h3 { color: var(--accent); margin-bottom: 1rem;
+        }
+        
+        .command-list { list-style-type: none;
+        }
+        
+        .command-list li { background-color: var(--code-bg); padding: 0.8rem; 
+            margin-bottom: 0.8rem; border-radius: 4px; font-family: monospace; 
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        
+        .key { display: inline-block; background-color: var(--primary); 
+            padding: 0.2rem 0.5rem; border-radius: 4px; margin: 0 0.2rem; 
+            font-family: monospace; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .highlight { color: var(--highlight); font-weight: bold;
+        }
+        
+        footer { text-align: center; padding: 2rem; background-color: 
+            var(--secondary); margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) { .card-container { grid-template-columns: 
+                1fr;
+            }
+            
+            h1 { font-size: 2rem;
+            }
+        }
+    </style> </head> <body> <header> <h1>Panduan TMUX</h1> <p 
+        class="subtitle">Terminal Multiplexer untuk Pengembang</p>
+    </header>
+    
+    <div class="container"> <section class="intro"> <p>TMUX adalah terminal 
+            multiplexer yang memungkinkan Anda menjalankan beberapa sesi 
+            terminal dalam satu jendela. Website ini akan membantu Anda 
+            mempelajari dasar-dasar penggunaan TMUX.</p>
+        </section>
+        
+        <h2 class="section-title">Instalasi</h2> <div class="card-container"> 
+            <div class="card">
+                <h3>Ubuntu/Debian</h3> <ul class="command-list"> <li>sudo apt 
+                    update</li> <li>sudo apt install tmux</li>
+                </ul> </div>
+            
+            <div class="card"> <h3>CentOS/RHEL/Fedora</h3> <ul 
+                class="command-list">
+                    <li>sudo yum install tmux</li> <li># atau</li> <li>sudo dnf 
+                    install tmux</li>
+                </ul> </div>
+            
+            <div class="card"> <h3>macOS</h3> <ul class="command-list"> 
+                    <li>brew install tmux</li> <li># atau</li> <li>port install 
+                    tmux</li>
+                </ul> </div> </div>
+        
+        <h2 class="section-title">Dasar-Dasar TMUX</h2> <div 
+        class="card-container">
+            <div class="card"> <h3>Memulai Sesion</h3> <ul 
+                class="command-list">
+                    <li>tmux <span class="highlight"># memulai sesi 
+                    baru</span></li> <li>tmux new -s <span 
+                    class="highlight">nama_sesi</span> <span 
+                    class="highlight"># sesi dengan nama</span></li> <li>tmux 
+                    attach -t <span class="highlight">nama_sesi</span> <span 
+                    class="highlight"># masuk ke sesi yang ada</span></li>
+                </ul> </div>
+            
+            <div class="card"> <h3>Keluar dari TMUX</h3> <ul 
+                class="command-list">
+                    <li>exit <span class="highlight"># keluar dari 
+                    sesi</span></li> <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">d</span> 
+                    <span class="highlight"># detach dari sesi</span></li>
+                </ul> </div>
+            
+            <div class="card"> <h3>Manajemen Window</h3> <ul 
+                class="command-list">
+                    <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">c</span> 
+                    <span class="highlight"># buat window baru</span></li> 
+                    <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">n</span> 
+                    <span class="highlight"># pindah ke window 
+                    berikutnya</span></li> <li><span class="key">Ctrl</span> + 
+                    <span class="key">b</span> kemudian <span 
+                    class="key">p</span> <span class="highlight"># pindah ke 
+                    window sebelumnya</span></li>
+                </ul> </div> </div>
+        
+        <h2 class="section-title">Manajemen Panel</h2> <div 
+        class="card-container">
+            <div class="card"> <h3>Membagi Panel</h3> <ul class="command-list"> 
+                    <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">%</span> 
+                    <span class="highlight"># bagi secara vertikal</span></li> 
+                    <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">"</span> 
+                    <span class="highlight"># bagi secara 
+                    horizontal</span></li>
+                </ul> </div>
+            
+            <div class="card"> <h3>Navigasi Panel</h3> <ul 
+                class="command-list">
+                    <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span 
+                    class="key">arrow</span> <span class="highlight"># pindah 
+                    ke panel</span></li> <li><span class="key">Ctrl</span> + 
+                    <span class="key">b</span> kemudian <span 
+                    class="key">q</span> <span class="highlight"># tampilkan 
+                    nomor panel</span></li> <li><span class="key">Ctrl</span> + 
+                    <span class="key">b</span> kemudian <span 
+                    class="key">o</span> <span class="highlight"># pindah ke 
+                    panel berikutnya</span></li>
+                </ul> </div>
+            
+            <div class="card"> <h3>Mengatur Ukuran Panel</h3> <ul 
+                class="command-list">
+                    <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">Ctrl</span> 
+                    + <span class="key">arrow</span> <span class="highlight"># 
+                    ubah ukuran panel</span></li> <li><span 
+                    class="key">Ctrl</span> + <span class="key">b</span> 
+                    kemudian <span class="key">z</span> <span 
+                    class="highlight"># zoom/unzoom panel</span></li>
+                </ul> </div> </div>
+        
+        <h2 class="section-title">Tips Lanjutan</h2> <div 
+        class="card-container">
+            <div class="card"> <h3>Manajemen Sesion</h3> <ul 
+                class="command-list">
+                    <li>tmux ls <span class="highlight"># lihat daftar 
+                    sesi</span></li> <li>tmux kill-session -t <span 
+                    class="highlight">nama_sesi</span> <span 
+                    class="highlight"># hapus sesi</span></li> <li>tmux 
+                    rename-session -t <span class="highlight">nama_lama</span> 
+                    <span class="highlight">nama_baru</span> <span 
+                    class="highlight"># ganti nama sesi</span></li>
+                </ul> </div>
+            
+            <div class="card"> <h3>Scroll dan Copy-Paste</h3> <ul 
+                class="command-list">
+                    <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">[</span> 
+                    <span class="highlight"># masuk mode copy</span></li> 
+                    <li>Gunakan <span class="key">arrow</span> untuk 
+                    navigasi</li> <li><span class="key">Space</span> untuk 
+                    mulai seleksi</li> <li><span class="key">Enter</span> untuk 
+                    copy</li> <li><span class="key">Ctrl</span> + <span 
+                    class="key">b</span> kemudian <span class="key">]</span> 
+                    <span class="highlight"># paste</span></li>
+                </ul> </div>
+            
+            <div class="card"> <h3>Konfigurasi</h3> <ul class="command-list"> 
+                    <li>Buat file ~/.tmux.conf</li> <li># Contoh: ubah prefix 
+                    key</li> <li>set-option -g prefix C-a</li> <li>unbind-key 
+                    C-b</li> <li>bind-key C-a send-prefix</li>
+                </ul> </div> </div> </div>
+    
+    <footer> <p>&copy; 2023 Panduan TMUX. Situs sederhana untuk mempelajari 
+        terminal multiplexer.</p>
+    </footer> </body>
+</html>
