@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Panduan TMUX</title>
+  <link rel="stylesheet" href="style.css">
+  <style>body{background:#2c3e50;color:#ecf0f1;font-family:sans-serif;}form{max-width:400px;margin:3rem auto;padding:2rem;background:#34495e;border-radius:8px;}input,button{width:100%;padding:0.5rem;margin-bottom:1rem;border-radius:4px;border:none;}button{background:#3498db;color:#fff;font-weight:bold;cursor:pointer;}a{color:#3498db;text-decoration:underline;}</style>
+</head>
+<body>
+  <form id="signup-form">
+    <h2>Sign Up</h2>
+    <input type="text" id="signup-username" placeholder="Username" required>
+    <input type="password" id="signup-password" placeholder="Password" required>
+    <button type="submit">Sign Up</button>
+    <p id="signup-msg"></p>
+    <p>Sudah punya akun? <a href="login.html">Login</a></p>
+  </form>
+  <script>
+    async function postData(url = '', data = {}) {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      return response.json().then(json => ({ status: response.status, ...json }));
+    }
+    document.getElementById('signup-form').onsubmit = async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('signup-username').value;
+      const password = document.getElementById('signup-password').value;
+      const msg = document.getElementById('signup-msg');
+      msg.textContent = '';
+      const res = await postData('/signup', { username, password });
+      if (res.status === 200) {
+        msg.style.color = 'limegreen';
+        msg.textContent = 'Registrasi berhasil! Silakan login.';
+        setTimeout(()=>{window.location.href = 'login.html';}, 1000);
+      } else {
+        msg.style.color = '#e74c3c';
+        msg.textContent = res.message || 'Registrasi gagal';
+      }
+    };
+  </script>
+</body>
+</html>

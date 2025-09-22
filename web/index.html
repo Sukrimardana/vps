@@ -85,11 +85,13 @@
         class="subtitle">Terminal Multiplexer untuk Pengembang</p>
     </header>
     
-    <div class="container"> <section class="intro"> <p>TMUX adalah terminal 
-            multiplexer yang memungkinkan Anda menjalankan beberapa sesi 
-            terminal dalam satu jendela. Website ini akan membantu Anda 
-            mempelajari dasar-dasar penggunaan TMUX.</p>
-        </section>
+            <div class="container">
+                <section class="intro">
+                    <p>TMUX adalah terminal multiplexer yang memungkinkan Anda menjalankan beberapa sesi terminal dalam satu jendela. Website ini akan membantu Anda mempelajari dasar-dasar penggunaan TMUX.</p>
+                </section>
+            <section class="intro">
+                <p>TMUX adalah terminal multiplexer yang memungkinkan Anda menjalankan beberapa sesi terminal dalam satu jendela. Website ini akan membantu Anda mempelajari dasar-dasar penggunaan TMUX.</p>
+            </section>
         
         <h2 class="section-title">Instalasi</h2> <div class="card-container"> 
             <div class="card">
@@ -211,7 +213,30 @@
                     C-b</li> <li>bind-key C-a send-prefix</li>
                 </ul> </div> </div> </div>
     
-    <footer> <p>&copy; 2023 Panduan TMUX. Situs sederhana untuk mempelajari 
-        terminal multiplexer.</p>
-    </footer> </body>
-</html>
+            <footer> <p>&copy; 2023 Panduan TMUX. Situs sederhana untuk mempelajari terminal multiplexer.</p>
+            </footer>
+            <script>
+                // Cek apakah sudah ada user terdaftar (dengan fetch ke /users/count)
+                                // Jika sudah login, tampilkan konten utama dan tombol logout
+                                if (localStorage.getItem('isLoggedIn') === 'true') {
+                                    // Tambahkan tombol logout di pojok kanan atas
+                                    const logoutBtn = document.createElement('button');
+                                    logoutBtn.textContent = 'Logout';
+                                    logoutBtn.style = 'position:fixed;top:20px;right:20px;padding:0.5rem 1rem;background:#e74c3c;color:#fff;border:none;border-radius:4px;z-index:1000;cursor:pointer;font-weight:bold;';
+                                    logoutBtn.onclick = function() {
+                                        localStorage.removeItem('isLoggedIn');
+                                        window.location.href = 'login.html';
+                                    };
+                                    document.body.appendChild(logoutBtn);
+                                } else {
+                                    fetch('/users/count').then(r=>r.json()).then(data => {
+                                        if (data.count === 0) {
+                                            window.location.href = 'signup.html';
+                                        } else {
+                                            window.location.href = 'login.html';
+                                        }
+                                    });
+                                }
+            </script>
+        </body>
+    </html>
